@@ -12,9 +12,9 @@ window.onload = function() {
     checkConnectStatus();
 }
 
-$(function() {
+// $(function() {
 
-});
+// });
 
 
 const inputImage = document.getElementById('file_put_btn');
@@ -37,13 +37,22 @@ inputImage.addEventListener("change", () => {
 });
 
 /* Web Bluetooth API */
-async function connctionToBle() {
+async function connctionToBluetooth() {
     try {
         const device = await navigator.bluetooth.requestDevice({
-        acceptAllDevices: true
+            acceptAllDevices: true
         });
         connectionStatus = true;
         console.log('選択されたデバイス:', device.name);
+
+        const server = await device.gatt.connect();
+
+        if (server) {
+            console.log( "connect true;");
+            console.log(server);
+        } else {
+            console.log( "connect false;");
+        }
     } catch(error) {
         console.log('デバイスの選択に失敗しました:', error);
     }
@@ -58,3 +67,15 @@ function checkConnectStatus() {
         console.log("接続完了");
     }
 }
+
+
+// receive image file 
+async function receiveImage() {
+    
+}
+
+$(function() {
+    $('.connect_btn').on('click', function() {
+        connctionToBluetooth();
+    });
+});
