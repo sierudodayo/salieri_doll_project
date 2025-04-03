@@ -28,7 +28,7 @@ inputImage.addEventListener("change", () => {
         image.src = reader.result;
 
         image.onload = () => {
-            canvas.width = 128;
+            canvas.width = 80;
             canvas.height = 160;
 
             ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
